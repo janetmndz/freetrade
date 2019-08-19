@@ -30,10 +30,12 @@ ActiveRecord::Schema.define(version: 2019_08_19_210220) do
   create_table "offers", force: :cascade do |t|
     t.datetime "date"
     t.boolean "status"
-    t.integer "wanted_item"
-    t.integer "offered_item"
+    t.integer "wanted_item_id"
+    t.integer "offered_item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["offered_item_id"], name: "index_offers_on_offered_item_id"
+    t.index ["wanted_item_id"], name: "index_offers_on_wanted_item_id"
   end
 
   create_table "question_answers", force: :cascade do |t|
@@ -47,10 +49,11 @@ ActiveRecord::Schema.define(version: 2019_08_19_210220) do
 
   create_table "reviews", force: :cascade do |t|
     t.bigint "user_id"
-    t.integer "reviwer"
+    t.integer "reviewer_id"
     t.text "review"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -65,6 +68,9 @@ ActiveRecord::Schema.define(version: 2019_08_19_210220) do
   end
 
   add_foreign_key "items", "users"
+  add_foreign_key "offers", "items", column: "offered_item_id"
+  add_foreign_key "offers", "items", column: "wanted_item_id"
   add_foreign_key "question_answers", "items"
   add_foreign_key "reviews", "users"
+  add_foreign_key "reviews", "users", column: "reviewer_id"
 end
