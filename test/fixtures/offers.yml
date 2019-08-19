@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2019-08-19 17:01:09
+  status: false
+  wanted_item: 1
+  offered_item: 1
+
+two:
+  date: 2019-08-19 17:01:09
+  status: false
+  wanted_item: 1
+  offered_item: 1
