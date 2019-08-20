@@ -8,5 +8,5 @@ class User < ApplicationRecord
     has_many :reviewers, through: :reviewees
 
     has_many :question_answers, through: :items
-    has_many :offers, through: :items
+    #has_many :offers, through: :items
 end
