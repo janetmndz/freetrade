@@ -2,6 +2,7 @@
     User.create(
         name: Faker::Name.name,
         email: Faker::Internet.email,
+        password: "abc123",
         age: rand(20..40),
         location: "New York, NY",
         bio: Faker::Lorem.paragraphs.join("\n")

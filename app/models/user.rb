@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_secure_password
     has_many :items
 
     has_many :reviews_made, foreign_key: :reviewer_id, class_name: 'Review'
