@@ -1,4 +1,4 @@
-5.times do 
+6.times do 
     User.create(
         name: Faker::Name.name,
         email: Faker::Internet.email,
@@ -30,17 +30,34 @@ questions = ["What is this?", "When was this bought?", "Is this worn?", "Are the
     )
 end
 
-sample_user = User.all.sample
-w_items = sample_user.items
-o_items = Item.all - w_items
+offers_users = []
+3.times do 
+    sample_user = (User.all - offers_users).sample
+    w_items = sample_user.items
+    o_items = Item.all - w_items
+    w_items.each do |wanted|
+        3.times do 
+            Offer.create(
+                date: Time.now.strftime("%d/%m/%Y"),
+                status: false,
+                wanted_item: wanted,
+                offered_item: o_items.sample
+            )
+        end
+    end
+    offers_users << sample_user
+end
 
-w_items.each do |wanted|
+reviewed_users = []
+
+3.times do
+    sample_reviewee = (User.all - reviewed_users).sample
     3.times do 
-        Offer.create(
-            date: Time.now.strftime("%d/%m/%Y"),
-            status: false,
-            wanted_item: wanted,
-            offered_item: o_items.sample
+        Review.create(
+            reviewee: sample_reviewee,
+            reviewer: User.all.reject{|u| u == sample_reviewee}.sample,
+            review: Faker::Lorem.paragraphs.join("\n")
         )
     end
+    reviewed_users << sample_reviewee
 end
