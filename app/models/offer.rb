@@ -1,4 +1,4 @@
 class Offer < ApplicationRecord
-    has_many :items 
-    has_many :users 
+    belongs_to :wanted_item, class_name: 'Item'
+    belongs_to :offered_item, class_name: 'Item'
 end
