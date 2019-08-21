@@ -1,0 +1,14 @@
+<%= form_tag '/users' %>
+    <%= label_tag 'user[email]', 'Email:' %>
+    <%= text_field_tag 'user[email]' %>
+    <%= label_tag 'user[password]', 'Password:' %>
+    <%= password_field_tag 'user[password]' %>
+    <%= label_tag 'user[name]', 'Name:' %>
+    <%= text_field_tag 'user[name]' %>
+    <%= label_tag 'user[age]', 'Age:' %>
+    <%= number_field_tag 'user[age]' %>
+    <%= label_tag 'user[location]', 'Location:' %>
+    <%= text_field_tag 'user[location]' %>
+    <%= label_tag 'user[bio]', 'Bio:' %>
+    <%= text_area_tag 'user[bio]' %>
+    <%= submit_tag "Sign Up" %>

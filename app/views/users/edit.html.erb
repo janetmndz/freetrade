@@ -1,0 +1,12 @@
+<h1>Edit User </h1>
+<%= form_for @current_user do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<%= f.label :age %>
+<%= f.number_field :age %>
+<%= f.label :location %>
+<%= f.text_field :location %>
+<%= f.label :bio %>
+<%= f.text_area :bio %>
+<%= f.submit %>
+<% end %>

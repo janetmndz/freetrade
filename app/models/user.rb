@@ -15,9 +15,8 @@ class User < ApplicationRecord
 
     has_many :question_answers, through: :items
 
-    has_many :offered_offers, through: :items
-    has_many :wanted_offers, through: :items
-
+    has_many :created_offers, through: :items
+    has_many :recieved_offers, through: :items
     def real_email
         if !(self.email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i)
             errors.add(:email, "is not a valid email")
@@ -25,7 +24,8 @@ class User < ApplicationRecord
     end
 
     def offers
-        self.wanted_offers + self.offered_offers
+        self.created_offers + self.recieved_offers
     end
+
 
 end

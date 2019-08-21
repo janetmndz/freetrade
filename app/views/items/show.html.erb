@@ -1,4 +1,5 @@
 <h1>Item show page</h1>
+<image src = <%= "#{@item.image_url}" %> >
 <div>Item name: <%= @item.name %></div>
 <div>Item description: <%= @item.description %></div>
 <div>Item condition: <%= @item.condition %></div>
@@ -18,6 +19,7 @@
 <% if @current_user==@item.user %>
     <%= link_to "Edit item", edit_item_path %>
     <%= button_to "Delete item", @item , :method => :delete %>
-   
+<% elsif @current_user != @item.user %>
+   <h3><%= link_to "I want to make an offer to this item", new_offer_path %><h3>
 <% end %>
 
