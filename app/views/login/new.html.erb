@@ -1,9 +1,14 @@
-<h1>This is our welcome screen</h1>
+<div class="form__container">
+    <div class= "form__header">
+        <h3>Login</h3>
+        <p>Please enter your email and password.</p>
+    </div>
+    <%= form_tag '/login' %>
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+    <%= submit_tag "Login" %>
 
-<h2>Login</h2>
-<%= form_tag '/login' %>
-<%= label_tag :email %>
-<%= text_field_tag :email %>
-<%= label_tag :password %>
-<%= password_field_tag :password %>
-<%= submit_tag "Login" %>
+    <%= link_to "Make a new account",  new_user_path, class: "bottom_link" %>
+</div>

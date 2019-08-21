@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Freetrade</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,10 +13,15 @@
   </head>
 
   <body>
-    <% if flash[:message] %>
-        <p><%= flash[:message] %></p>
-    <% end %>
-    
-    <%= yield %>
+    <main>
+      <% if flash[:message] %>
+        <div class="error__box">
+          <p><%= flash[:message] %></p>
+        </div>
+      <% end %>
+      
+      <%= yield %>
+    </main>
+
   </body>
 </html>
