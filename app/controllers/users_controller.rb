@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
+    
     def new
         
     end
+    
+    def show
+     byebug
+    end
+
     def create
         @user = User.create(user_params)
         if @user.valid?
-            #Here is where we set the user in the session
+           set_up_auth_variables
             redirect_to items_path
         else
             flash[:errors] = @user.errors.full_messages
@@ -13,8 +19,17 @@ class UsersController < ApplicationController
         end
 
     end
+
+    def edit
+    end
+
+    def update
+    end
+
     private
     def user_params
         params.require(:user).permit(:email, :password, :name, :age, :location, :bio)
+    end
+    def find_user
     end
 end

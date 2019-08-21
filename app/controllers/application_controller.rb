@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-# before_action :set_up_auth_variables
+before_action :set_up_auth_variables
 
     def set_up_auth_variables
         
@@ -12,14 +12,14 @@ class ApplicationController < ActionController::Base
 
 
     def autorized
-        
-        if !!@logged_in
+        #byebug
+       if !@loged_in
             return redirect_to welcome_path
         end
 
     end
 
-    def logout
+    def signout
         session["user_id"]=nil
     end
 end

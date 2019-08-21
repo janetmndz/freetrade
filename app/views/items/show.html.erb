@@ -1,0 +1,23 @@
+<h1>Item show page</h1>
+<div>Item name: <%= @item.name %></div>
+<div>Item description: <%= @item.description %></div>
+<div>Item condition: <%= @item.condition %></div>
+<div>Item category: <%= @item.category %></div>
+<div>Item trade: <%= @item.trade %></div>
+<div>User: <%= @item.user.name %></div>
+
+<h3>Questions & Answers </h3>
+<% if @item.question_answers.length!= 0 %>
+
+<% @item.question_answers.each do |q_a| %>
+    <%= q_a.question %>
+   <%= q_a.answer %>
+<% end %>
+<% end %>
+
+<% if @current_user==@item.user %>
+    <%= link_to "Edit item", edit_item_path %>
+    <%= button_to "Delete item", @item , :method => :delete %>
+   
+<% end %>
+
