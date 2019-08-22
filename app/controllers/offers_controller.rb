@@ -1,6 +1,6 @@
 class OffersController < ApplicationController
-     before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy]
-   before_action :find_offer, only: [:show, :edit, :update,:accept, :decline, :destroy]
+before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy]
+   before_action :find_offer, only: [:show, :edit, :update,:accept, :decline, :destroy, :confirmed_offer]
     
    def index
     @created_offers = @current_user.created_offers
@@ -80,11 +80,12 @@ class OffersController < ApplicationController
    end
    
 def confirmed_offer
-
+    @reviewee = @offer.wanted_item.user
     @offer.offered_item.update(user:@offer.wanted_item.user)
     @offer.wanted_item.update(user:@current_user)
     @offer.destroy
-    redirect_to my_items_path
+    flash[:id] = @reviewee.id
+    redirect_to new_review_path
 end
 
    def find_offer
