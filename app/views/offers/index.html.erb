@@ -1,1 +1,13 @@
-<h1>Offer Index page</h1>
+<h1>All my offers</h1>
+
+<h4>Created</h4>
+<% @created_offers.each do |offer| %>
+
+<div><%= link_to "#{offer.wanted_item.name}", offer %></div>
+<%end%>
+
+<h4>Recieved</h4>
+<% @recieved_offers.each do |offer| %>
+
+<div><%= link_to "#{offer.offered_item.name} | status: #{offer.status}", offer %></div>
+<%end%>
