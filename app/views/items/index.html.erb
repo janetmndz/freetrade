@@ -1,11 +1,11 @@
-<h3> <%= link_to @current_user.name, @current_user %> loged in | <%= button_to "LogOut", logout_path, method: :delete %> </h1>
-
 <h1>All availble items to trade with</h1>
 
-<%= link_to "Add new Item", new_item_path%>
-<% @items.each do |item| %>
-   <div>item name:  <%= link_to item.name, item%> </div>
-  <div>user name:  <%= item.user.name %> </div>
-  
-   <% end %>
-   
+<%= link_to "Add new Item", new_item_path, class: "link_button"%>
+
+<div class="rows-container">
+  <% @items.each do |item| %>
+    <div class="rows-item">
+      <p> <%= link_to item.name.capitalize, item %> — Owned By: <%= item.user.name %></p>
+    </div>
+  <% end %>  
+</div>

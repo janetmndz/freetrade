@@ -26,7 +26,6 @@ questions = ["What is this?", "When was this bought?", "Is this worn?", "Are the
 10.times do 
     QuestionAnswer.create(
         question: questions.sample,
-        answer: "",
         item: Item.all.sample
     )
 end

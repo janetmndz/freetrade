@@ -3,5 +3,5 @@
 <div>Age:  <%= @current_user.age %> </div>
 <div>Location:  <%= @current_user.location %> </div>
 <div>Bio:  <%= @current_user.bio %> </div>
-<div> <%= link_to "Edit information", edit_user_path%></div>
-<div> <%= link_to "Edit personal information", edit_user_path%></div>
+<%= link_to "Edit information", edit_user_path, class: "link_button"%>
+<%= link_to "Edit personal information", edit_user_path, class: "link_button"%>

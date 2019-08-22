@@ -1,26 +1,52 @@
-<h1>Item show page</h1>
-<image src = <%= "#{@item.image_url}" %> >
-<div>Item name: <%= @item.name %></div>
-<div>Item description: <%= @item.description %></div>
-<div>Item condition: <%= @item.condition %></div>
-<div>Item category: <%= @item.category %></div>
-<div>Item trade: <%= @item.trade %></div>
-<div>User: <%= @item.user.name %></div>
-
-<h3>Questions & Answers </h3>
-<% if @item.question_answers.length!= 0 %>
-
-<% @item.question_answers.each do |q_a| %>
-    <%= q_a.question %>
-   <%= q_a.answer %>
-<% end %>
-<% end %>
-
-<% if @current_user==@item.user %>
-    <%= link_to "Edit item", edit_item_path %>
-    <%= button_to "Delete item", @item , :method => :delete %>
+<% if @owned_item %>
+    <%= link_to "Edit item", edit_item_path, class: "link_button" %>
+    <%= button_to "Delete item", @item , :method => :delete, class: "delete_button"%>
 <% elsif @current_user != @item.user %>
+    <h3><%= link_to "I want to make an offer to this item", new_offer_path %><h3>
+<% end %>
+<h1><%= @item.name.capitalize %></h1>
+<h3>Owned by: <%= @item.user.name %></h3>
+<% if @item.image_url %>
+<image src = <%= "#{@item.image_url}"%> class="item__image" >
+<% end %>
+<div class="item__container">
+    <div>
+        <h3>Description:</h3> 
+        <p><%= @item.description %></p>
+    </div>
+    <div>
+        <h3>Condition:</h3> 
+        <p><%= @item.condition %></p>
+    </div>
+    <div>
+        <h3>Category:</h3> 
+        <p><%= @item.category.capitalize %></p>
+    </div>
+    <h3>Trade: <%= @item.trade %> </h3> 
+</div>
 
-   <%= button_to "I want to make an offer to this item", { controller: 'offers', action: "new", id: @item.id }, :method => :post %>
+<h3>Questions & Answers:</h3>
+<% if @item.question_answers.length!= 0 %>
+    <% @item.question_answers.each do |q_a| %>
+            <div class="question_block" style="border: 1px solid #000">
+            <p><%= q_a.question %></p>
+            <p><%= q_a.answer %></p>
+            <% if @owned_item %>
+                <%= link_to "Edit/Answer", edit_question_answer_path(q_a) %>
+                
+            <% end %>   
+        </div>
+    <% end %>
+
+<% else %>
+    <p>There were no questions asked or answer.</p>
 <% end %>
 
+<% if  !@owned_item %>
+    <%= form_for(@q_a) do |f| %>
+        <%= f.label :question, "Ask a Question:" %>
+        <%= f.text_field :question %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <%= f.submit "Submit" %>
+    <% end %>
+<% end %>
