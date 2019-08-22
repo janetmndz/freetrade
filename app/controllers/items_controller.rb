@@ -27,12 +27,17 @@ class ItemsController < ApplicationController
     end
 
     def show
-        
+        if @current_user == @item.user
+            @owned_item = true
+        else
+            @q_a = QuestionAnswer.new()
+        end
      end
     def edit
     end
+
     def update
-          @item = Item.create(item_params)
+        @item.update(item_params)
        if @item.valid?
         flash[:message]="Item was updated"
        redirect_to @item

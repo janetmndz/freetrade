@@ -7,9 +7,8 @@ class Item < ApplicationRecord
   has_many :recieved_offers, foreign_key: :wanted_item_id, class_name: 'Offer', dependent: :destroy
   has_many :recieved_offers_items, through: :recieved_offers, :source => :offered_item
 
-  has_many :question_answers
+  has_many :question_answers, dependent: :destroy
 
   validates :name, :description, :condition, :category, :trade, :user_id, presence: true
-       
 
 end

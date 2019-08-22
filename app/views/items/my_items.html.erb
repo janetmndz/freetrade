@@ -1,7 +1,9 @@
-<h1>My Items</h1>
-<%= link_to "Add new Item", new_item_path%>
-<% @items.each do |item| %>
-   <div>item name:  <%= link_to item.name, item%> </div>
-  <% end %>
-   
-  
+<h1>All of my Items</h1>
+<%= link_to "Add new Item", new_item_path, class: "link_button" %>
+<div class="rows-container">
+  <% @items.each do |item| %>
+    <div class="rows-item">
+      <p> <%= link_to item.name.capitalize, item %> </p>
+    </div>
+  <% end %>  
+</div>

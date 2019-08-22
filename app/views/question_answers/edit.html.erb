@@ -1,0 +1,7 @@
+<h1>Answering this Question</h1>
+<h3>Question: <%= @question.question %></h3>
+<%= form_for(@question) do |f| %>
+    <%= f.label :answer %>
+    <%= f.text_field :answer %>
+    <%= f.submit "Answer"%> 
+<% end %>
