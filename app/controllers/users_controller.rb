@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     def create
         @current_user = User.create(user_params)
         if @current_user.valid?
-            sessions["user_id"] = @current_user.id
+            session["user_id"] = @current_user.id
             redirect_to items_path
         else
             flash[:errors] = @current_user.errors.full_messages

@@ -5,7 +5,7 @@ class User < ApplicationRecord
     validate :real_email
     validates :age, numericality: { greater_than: 17, less_than: 110  }
 
-    has_many :items
+    has_many :items, dependent: :destroy
 
     has_many :created_reviews, foreign_key: :reviewer_id, class_name: 'Review'
     has_many :reviewed, through: :created_reviews, :source => :reviewee

@@ -1,0 +1,17 @@
+<h1>This is offer show page</h1>
+<div>Wanted item  <%= link_to @offer.wanted_item.name, @offer.wanted_item %> </div>
+<div>Offered item  <%= link_to @offer.offered_item.name, @offer.offered_item %> </div>
+
+
+<% if @current_user.recieved_offers.include?(@offer) %>
+
+<%= button_to "Accept", { action: "accept", id: @offer.id }, method: :post %>
+                                
+<%= button_to "Decline", { action: "decline", id: @offer.id }, method: :post %>
+                                
+<% elsif @offer.status  %>
+ 
+<%= button_to "Confirm", { action: "confirmed_offer", id: @offer.id }, method: :post %>
+
+<% end %>
+<%= button_to "Delete", { action: "destroy", id: @offer.id }, method: :delete %>

@@ -20,6 +20,7 @@
     <%= link_to "Edit item", edit_item_path %>
     <%= button_to "Delete item", @item , :method => :delete %>
 <% elsif @current_user != @item.user %>
-   <h3><%= link_to "I want to make an offer to this item", new_offer_path %><h3>
+
+   <%= button_to "I want to make an offer to this item", { controller: 'offers', action: "new", id: @item.id }, :method => :post %>
 <% end %>
 
