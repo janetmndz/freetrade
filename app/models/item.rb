@@ -11,4 +11,8 @@ class Item < ApplicationRecord
 
   validates :name, :description, :condition, :category, :user_id, presence: true
 
+  def all_offers
+    self.created_offers + self.recieved_offers
+  end
+
 end

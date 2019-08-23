@@ -2,7 +2,7 @@
     <%= link_to "Edit item", edit_item_path, class: "link_button" %>
     <%= button_to "Delete item", @item , :method => :delete, class: "delete_button"%>
 <% elsif @current_user != @item.user %>
-    <%= link_to "I want to make an offer to this item", offers_new_path, class: "link_button" %>
+    <%= link_to "I want to make an offer to this item", new_offer_path(:id => @item.id), class: "link_button" %>
 <% end %>
 <h1><%= @item.name.capitalize %></h1>
 <h3>Owned by: <%= @item.user.name %></h3>
