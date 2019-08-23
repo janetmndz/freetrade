@@ -1,17 +1,19 @@
-<h1>Offer View Page</h1>
-<div>Wanted item  <%= link_to @offer.wanted_item.name, @offer.wanted_item %> </div>
-<div>Offered item  <%= link_to @offer.offered_item.name, @offer.offered_item %> </div>
+<h1>Offer Details</h1>
+<div class="offer_single">
+    <h3><%= link_to "#{@offer.wanted_item.name.capitalize} from: #{@offer.wanted_item.user.name}", @offer.wanted_item %>
+      🔁  <%= link_to "#{@offer.offered_item.name.capitalize} from: #{@offer.offered_item.user.name}", @offer.offered_item %> </h3>
 
+</div>
 
 <% if @current_user.recieved_offers.include?(@offer) %>
 
-<%= button_to "Accept", { action: "accept", id: @offer.id }, method: :post %>
+<%= button_to "Accept", { action: "accept", id: @offer.id }, method: :post, class: "accept_button" %>
                                 
-<%= button_to "Decline", { action: "decline", id: @offer.id }, method: :post %>
+<%= button_to "Decline", { action: "decline", id: @offer.id }, method: :post, class: "delete_button" %>
                                 
 <% elsif @offer.status  %>
  
-<%= button_to "Confirm", { action: "confirmed_offer", id: @offer.id }, method: :post %>
-
+<%= button_to "Confirm", { action: "confirmed_offer", id: @offer.id }, method: :post, class: "accept_button" %>
+<% else %>
+<%= button_to "Delete", { action: "destroy", id: @offer.id }, method: :delete, class: "delete_button" %>
 <% end %>
-<%= button_to "Delete", { action: "destroy", id: @offer.id }, method: :delete %>

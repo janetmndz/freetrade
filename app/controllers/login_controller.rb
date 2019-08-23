@@ -9,7 +9,7 @@ class LoginController < ApplicationController
         if @user && @user.authenticate(params[:password])
             #set session["user_id"]
             session["user_id"] = @user.id
-            flash[:message] = "Logging in #{@user.name}"
+            flash[:message] = "Welcome back, #{@user.name}!"
             redirect_to items_path
 
         else

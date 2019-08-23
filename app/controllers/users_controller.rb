@@ -14,6 +14,7 @@ class UsersController < ApplicationController
         @current_user = User.create(user_params)
         if @current_user.valid?
             session["user_id"] = @current_user.id
+            flash[:message] = "Welcome to FreeTrade, #{@current_user.name}!"
             redirect_to items_path
         else
             flash[:errors] = @current_user.errors.full_messages

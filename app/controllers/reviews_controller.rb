@@ -1,6 +1,9 @@
 class ReviewsController < ApplicationController
 before_action :find_review, only: (:show)
      def show
+        if @current_user != @review.reviewer
+            redirect_to items_path
+        end
      end
 
     def new

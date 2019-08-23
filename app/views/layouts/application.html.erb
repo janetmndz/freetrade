@@ -15,18 +15,20 @@
   <body>
     <% if session["user_id"] != nil && @current_user%>
       <nav class="user_navigation">
+        <nav class= "inner_nav">
+          <div class="inner_item hover_item">
+            <%= link_to 'All Items', items_path %>
+          </div>
+          <div class="inner_item hover_item">
+            <%= link_to 'My Items', my_items_path %>
+          </div>
+          <div class="inner_item hover_item">
+            <%= link_to 'My Offers', offers_path %>         
+          </div>
+        </nav>
         <div class="user_navigation_item">
-          <%= link_to @current_user.name, @current_user %> loged in
+          <%= link_to @current_user.name, @current_user %>
           <%= button_to "LogOut", logout_path, method: :delete %>
-        </div>
-        <div class="user_navigation_item hover_item">
-          <%= link_to 'All Items', items_path %>
-        </div>
-        <div class="user_navigation_item hover_item">
-          <%= link_to 'My Items', my_items_path %>
-        </div>
-        <div class="user_navigation_item hover_item">
-          <%= link_to 'My Offers', offers_path %>         
         </div>
       </nav>
     <% end %>

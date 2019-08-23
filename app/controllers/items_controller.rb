@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
     
-   before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy, :my_items]
+   before_action :autorized, only: [:index, :show, :new, :edit, :update, :create, :destroy, :my_items]
    before_action :find_item, only: [:show, :edit, :update, :destroy]
     def index
-       @items = Item.all-@current_user.items
+       @items = (Item.all-@current_user.items).select{|item| item.trade}
     end 
 
     def new
@@ -34,6 +34,9 @@ class ItemsController < ApplicationController
         end
      end
     def edit
+        if @item.user != @current_user
+            redirect_to items_path
+        end
     end
 
     def update

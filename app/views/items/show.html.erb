@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<h3>Questions & Answers:</h3>
+<h2 style="text-align:center;">Questions & Answers:</h2>
 <% if @item.question_answers.length!= 0 %>
     <% @item.question_answers.each do |q_a| %>
             <div class="question_block" style="border: 1px solid #000">
@@ -41,7 +41,7 @@
     <% end %>
 
 <% else %>
-    <p>There were no questions asked or answer.</p>
+    <p style="text-align: center">No questions were asked.</p>
 <% end %>
 
 <% if  !@owned_item %>

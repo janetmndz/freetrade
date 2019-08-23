@@ -1,4 +1,13 @@
-<h1>Review show page </h1>
-<div><%=@review.reviewer.name %></div>
-<div><%=@review.reviewee.name %></div>
-<div><%=@review.review %></div>
+<h1>Review</h1>
+<div class="item__container">
+    <div>
+        <h3>Reviewee: <%= @review.reviewee.name %></h3> 
+    </div>
+    <div>
+        <h3>Reviewer: <%= @review.reviewer.name %></h3> 
+    </div>
+    <div>
+        <h3>Review:</h3> 
+        <p><%= @review.review %></p>
+    </div>
+</div>
