@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
        redirect_to @item
      else
         flash[:errors]=@item.errors.full_messages
-        redirect_to new_item_path
+        redirect_to item_path
      end
 
     end
@@ -33,11 +33,14 @@ class ItemsController < ApplicationController
             @q_a = QuestionAnswer.new()
         end
      end
+
     def edit
     end
 
     def update
         @item.update(item_params)
+        # @item.update(trade:false)
+    
        if @item.valid?
         flash[:message]="Item was updated"
        redirect_to @item
@@ -61,8 +64,12 @@ class ItemsController < ApplicationController
         @item = Item.find(params[:id])
     end
     def item_params
-
-        params.require(:item).permit(:name, :description, :condition, :category,:trade, :image_url, :user_id)
+        if params[:item][:trade] == "true"
+            params[:item][:trade] = true
+        else
+            params[:item][:trade] = false
+        end
+        params.require(:item).permit(:name, :description, :condition, :trade, :category, :image_url, :user_id)
     end
     
 

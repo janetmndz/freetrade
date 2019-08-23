@@ -9,6 +9,6 @@ class Item < ApplicationRecord
 
   has_many :question_answers, dependent: :destroy
 
-  validates :name, :description, :condition, :category, :trade, :user_id, presence: true
+  validates :name, :description, :condition, :category, :user_id, presence: true
 
 end

@@ -22,7 +22,14 @@
         <h3>Category:</h3> 
         <p><%= @item.category.capitalize %></p>
     </div>
-    <h3>Trade: <%= @item.trade %> </h3> 
+    <div>
+<h3>Trade: <%if @item.trade %>
+   
+   <%= "Yes" %>
+    <% else %>
+    <%= "No" %>
+<% end %>
+</h3> 
 </div>
 
 <h3>Questions & Answers:</h3>
