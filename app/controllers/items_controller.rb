@@ -61,8 +61,9 @@ class ItemsController < ApplicationController
         @item = Item.find(params[:id])
     end
     def item_params
-
-        params.require(:item).permit(:name, :description, :condition, :category, :image_url, :user_id)
+        params[:item][:trade] = params[:item][:trade] == "true" ? true : false
+        
+        params.require(:item).permit(:name, :description, :condition, :category, :trade, :image_url, :user_id)
     end
     
 

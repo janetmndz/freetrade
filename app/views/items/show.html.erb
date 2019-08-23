@@ -6,7 +6,7 @@
 <% end %>
 <h1><%= @item.name.capitalize %></h1>
 <h3>Owned by: <%= @item.user.name %></h3>
-<% if @item.image_url %>
+<% if @item.image_url && @item.image_url.length != 0%>
 <image src = <%= "#{@item.image_url}"%> class="item__image" >
 <% end %>
 <div class="item__container">
@@ -21,6 +21,9 @@
     <div>
         <h3>Category:</h3> 
         <p><%= @item.category.capitalize %></p>
+    </div>
+    <div>
+        <h3>Trade: <%= @item.trade ? "Yes" : "No" %> </h3> 
     </div>
 </div>
 

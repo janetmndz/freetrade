@@ -23,7 +23,7 @@ conditions = ["worn", "used", "like-new", "barely used", "never used", "some wea
 end
 questions = ["What is this?", "When was this bought?", "Is this worn?", "Are there scratches?", "Is this kid/pet safe?", "Was this refurbished?", "How old is this?", "Why are you giving this away?" ]
 
-10.times do 
+8.times do 
     QuestionAnswer.create(
         question: questions.sample,
         item: Item.all.sample
@@ -52,7 +52,7 @@ reviewed_users = []
 
 3.times do
     sample_reviewee = (User.all - reviewed_users).sample
-    3.times do 
+    2.times do 
         Review.create(
             reviewee: sample_reviewee,
             reviewer: User.all.reject{|u| u == sample_reviewee}.sample,
