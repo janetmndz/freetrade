@@ -1,17 +1,6 @@
-<h1>All my Offers</h1>
+<h1>All Offers</h1>
 
 <div class="offer_container">
-    <h3>Offers to Confirm</h3>
-    <% @pending_offers.each do |offer| %>
-        <div class= "offer_item">
-            <h5 style="background: lightgrey">Offer with: <%= offer.wanted_item.user.name %></h5>
-            <h4>Trading: <%= link_to "#{offer.wanted_item.name} 🔁 #{offer.offered_item.name} (owned)", offer %>
-            </h4>
-        </div>
-
-        
-    <% end %>
-
     <h3>Created Offers</h3>
     <% @created_offers.each do |offer| %>
 
@@ -22,7 +11,7 @@
     </div>
     <%end%>
 
-    <h4>Recieved Offers</h4>
+    <h3>Recieved Offers</h3>
     <% @recieved_offers.each do |offer| %>
         <div class= "offer_item">
             <h5 style="background: #7CB518">Offer from: <%= offer.offered_item.user.name %></h5>

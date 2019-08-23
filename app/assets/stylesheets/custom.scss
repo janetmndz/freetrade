@@ -52,7 +52,7 @@ body{
     .inner_nav{
         display: flex;
         padding: 0 30px;
-        width: 50%;
+        width: 60%;
         align-items: flex-end;
         justify-content: space-between;
         .inner_item.hover_item {
@@ -298,7 +298,7 @@ main{
     margin: 10px 0px;
     padding: 0 15px;
     &>p:nth-child(2) {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 }
 .new_question_answer, .edit_question_answer{
@@ -414,5 +414,27 @@ main{
         -webkit-appearance: button;
         background: $blue;
         border-radius: 10px;
+    }
+}
+
+form[action="/items"] {
+    width: 45%;
+    margin: 0 auto;
+    input[type="text"] {
+        width: 20rem;
+        padding: 0.5rem;
+        font-size: 1.05rem;
+        border-radius: 3px;
+        border: 1px solid #000;
+    }
+
+    input[type="submit"] {
+        width: 9rem;
+        height: 2.5rem;
+        font-size: 0.875rem;
+        margin: 5px 0;
+        background: #E5EDF8;
+        border-radius: 3px;
+        border: 1px solid #413B3D;
     }
 }

@@ -1,4 +1,12 @@
-<h1>Questions to answer</h1>
-<% @questions.each do |question| %>
-    <%= question.question %>
+<h1>Questions To Answer</h1>
+<% if @questions.count != 0 %>
+    <% @questions.each do |q_a| %>
+            <div class="question_block" style="border: 1px solid #000">
+            <p><%= q_a.question %></p>
+            <p> <strong><%= q_a.answer %></strong></p>
+            <%= link_to "Edit/Answer", edit_question_answer_path(q_a), class: "answer_button" %> 
+        </div>
     <% end %>
+<% else %>
+    <p style="text-align: center">There are no questions to answer.</p>
+<% end %>
