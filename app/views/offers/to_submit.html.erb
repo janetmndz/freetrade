@@ -1,0 +1,4 @@
+<h1>Offers to submit</h1>
+<% @offers.each do |offer| %>
+    <p><%= link_to "#{offer.wanted_item.name} from #{offer.wanted_item.user.name} | My: #{offer.offered_item.name}", offer %></p>
+<% end %>

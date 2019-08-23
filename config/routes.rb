@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :reviews
-  resources :offers, except: [:new]
+  resources :offers
   resources :question_answers
   resources :items
   resources :users
@@ -13,10 +13,9 @@ Rails.application.routes.draw do
   post '/accept', to: 'offers#accept'
   post '/decline', to: 'offers#decline'
   post '/confirmed_offer', to: 'offers#confirmed_offer'
- 
   post '/offers/new', to: 'offers#new'
-  
-  
+  get '/offers_to_submit', to: 'offers#to_submit'
+  get '/questions_to_answer', to: 'question_answers#to_answer'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'login#new'
 end

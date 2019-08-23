@@ -1,9 +1,10 @@
 class OffersController < ApplicationController
-before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy]
+before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy, :to_submit]
    before_action :find_offer, only: [:show, :edit, :update,:accept, :decline, :destroy, :confirmed_offer]
     
    def index
-    @created_offers = @current_user.created_offers
+    @pending_offers = @current_user.created_offers.select{|offer| offer.status == true} 
+    @created_offers = @current_user.created_offers - @pending_offers
     @recieved_offers = @current_user.recieved_offers
     end
 
@@ -14,7 +15,6 @@ before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy
     def new
       
     @offer= Offer.new
-    
     @item=Item.find(params[:id])
       
     end
@@ -43,6 +43,10 @@ before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy
         flash[:errors]=@offer.errors.full_messages
         redirect_to edit_offer_path
      end
+    end
+    
+    def to_submit
+    @offers = @current_user.created_offers.select{|offer| offer.status == true} 
     end
 
     def destroy
@@ -80,10 +84,19 @@ before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy
    end
    
 def confirmed_offer
+    #keep the old user to review later
     @reviewee = @offer.wanted_item.user
+    #destroy attatched offers
+    @offer.wanted_item.created_offers.destroy_all()
+    @offer.offered_item.created_offers.destroy_all()
+    @offer.wanted_item.recieved_offers.destroy_all()
+    @offer.offered_item.recieved_offers.destroy_all()
+    #here we switch item owner
     @offer.offered_item.update(user:@offer.wanted_item.user)
     @offer.wanted_item.update(user:@current_user)
+    #destroy offer after it has been cofirmed
     @offer.destroy
+    #one time chance to make a review
     flash[:id] = @reviewee.id
     redirect_to new_review_path
 end

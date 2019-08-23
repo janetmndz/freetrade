@@ -1,9 +1,17 @@
 class ItemsController < ApplicationController
     
-   before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy, :my_items]
+   before_action :autorized, only: [:index, :show, :new, :edit, :update, :create, :destroy, :my_items]
    before_action :find_item, only: [:show, :edit, :update, :destroy]
     def index
-       @items = Item.all-@current_user.items
+       
+       if params[:search]
+        
+        @items = Item.where("name like ?", "%#{params[:search].downcase}%")
+       
+      else
+        @items = Item.all-@current_user.items
+       end
+        
     end 
 
     def new
@@ -18,7 +26,7 @@ class ItemsController < ApplicationController
     @item = Item.create(item_params)
        if @item.valid?
         flash[:message]="New item added"
-       redirect_to @item
+        redirect_to @item
      else
         flash[:errors]=@item.errors.full_messages
         redirect_to item_path
@@ -64,12 +72,9 @@ class ItemsController < ApplicationController
         @item = Item.find(params[:id])
     end
     def item_params
-        if params[:item][:trade] == "true"
-            params[:item][:trade] = true
-        else
-            params[:item][:trade] = false
-        end
-        params.require(:item).permit(:name, :description, :condition, :trade, :category, :image_url, :user_id)
+        params[:item][:trade] = params[:item][:trade] == "true" ? true : false
+        
+        params.require(:item).permit(:name, :description, :condition, :category, :trade, :image_url, :user_id)
     end
     
 

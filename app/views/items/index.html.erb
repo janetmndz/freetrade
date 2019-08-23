@@ -1,6 +1,10 @@
-<h1>All availble items to trade with</h1>
+<h1>All available items to trade with</h1>
 
 <%= link_to "Add new Item", new_item_path, class: "link_button"%>
+<%= form_tag "/items", method: :get do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag "Search!!" %>
+<% end %>
 
 <div class="rows-container">
   <% @items.each do |item| %>

@@ -1,4 +1,5 @@
 class QuestionAnswersController < ApplicationController
+    before_action :autorized, only: [:edit, :to_answer]
     before_action :find_q_a, only: [:edit, :update]
     def create
         @question = QuestionAnswer.create(question_params)
@@ -20,7 +21,11 @@ class QuestionAnswersController < ApplicationController
         @question.update(answer_params)
         redirect_to @question.item
     end
-
+    
+    def to_answer
+        # @questions=QuestionAnswer.find_by(item.user: @current_user)
+        @questions=@current_user.question_answers.select {|q_a| !q_a.answer}
+    end
     private
 
     def question_params
