@@ -1,11 +1,12 @@
-6.times do 
+names = ["Rachel Green", "Monica Geller", "Phoebe Buffay", "Joey Tribbiani", "Chandler Bing", "Ross Geller"]
+names.each do |name|
     User.create(
-        name: Faker::Name.name,
-        email: Faker::Internet.email,
+        name: name,
+        email: "#{name.downcase.split(' ').join('_') + '@email.com'}",
         password: "abc123",
         age: rand(20..40),
         location: "New York, NY",
-        bio: Faker::Lorem.paragraphs.join("\n")
+        bio: Faker::TvShows::Friends.quote
     )
 end
 
@@ -17,7 +18,6 @@ conditions = ["worn", "used", "like-new", "barely used", "never used", "some wea
         description: Faker::Lorem.paragraph,
         condition: conditions.sample,
         category: "furniture",
-        trade: true,
         user: User.all.sample
     )
 end
@@ -36,7 +36,7 @@ offers_users = []
     w_items = sample_user.items
     o_items = Item.all - w_items
     w_items.each do |wanted|
-        3.times do 
+        2.times do 
             Offer.create(
                 date: Time.now.strftime("%d/%m/%Y"),
                 status: false,

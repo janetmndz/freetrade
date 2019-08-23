@@ -2,7 +2,7 @@
     <%= link_to "Edit item", edit_item_path, class: "link_button" %>
     <%= button_to "Delete item", @item , :method => :delete, class: "delete_button"%>
 <% elsif @current_user != @item.user %>
-    <h3><%= link_to "I want to make an offer to this item", offers_new_path %><h3>
+    <%= link_to "I want to make an offer to this item", offers_new_path, class: "link_button" %>
 <% end %>
 <h1><%= @item.name.capitalize %></h1>
 <h3>Owned by: <%= @item.user.name %></h3>
@@ -22,7 +22,6 @@
         <h3>Category:</h3> 
         <p><%= @item.category.capitalize %></p>
     </div>
-    <h3>Trade: <%= @item.trade %> </h3> 
 </div>
 
 <h3>Questions & Answers:</h3>
@@ -30,9 +29,9 @@
     <% @item.question_answers.each do |q_a| %>
             <div class="question_block" style="border: 1px solid #000">
             <p><%= q_a.question %></p>
-            <p><%= q_a.answer %></p>
+            <p> <strong><%= q_a.answer %></strong></p>
             <% if @owned_item %>
-                <%= link_to "Edit/Answer", edit_question_answer_path(q_a) %>
+                <%= link_to "Edit/Answer", edit_question_answer_path(q_a), class: "link_button" %>
                 
             <% end %>   
         </div>
