@@ -1,7 +1,23 @@
-<h2><%= @current_user.name %> show page</h2>
-<div>Name:  <%= @current_user.name %> </div>
-<div>Age:  <%= @current_user.age %> </div>
-<div>Location:  <%= @current_user.location %> </div>
-<div>Bio:  <%= @current_user.bio %> </div>
+<h1><%= @current_user.name %></h1>
+<h3>Age:  <%= @current_user.age %> </h3>
+<h3>Location:  <%= @current_user.location %> </h3>
+<div>
+    <h3>Biography:</h3>
+    <p><%= @current_user.bio %></p>
+</div>
 <%= link_to "Edit information", edit_user_path, class: "link_button"%>
-<%= link_to "Edit personal information", edit_user_path, class: "link_button"%>
+
+<hr>
+<h2><%= @current_user.name %>'s Reviews:</h2>
+<div class="reviews_container">
+    <% if @current_user.recieved_reviews.count != 0 %>
+        <% @current_user.recieved_reviews.each do |review| %>
+            <div style= "border: 1px solid #000; margin: 10px 0px;">
+                <p><%= review.review %></p>
+                <p><strong>Written by: <%= review.reviewer.name %></strong></p>
+            </div>
+        <% end %>
+    <% else %>
+        <p>I don't have anything</p>
+    <% end %>
+</div>

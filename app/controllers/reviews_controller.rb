@@ -14,7 +14,6 @@ before_action :find_review, only: (:show)
     end
 
      def create
-        byebug
        @review = Review.create(review_params)
        if @review.valid?
         flash[:message]="Review added"

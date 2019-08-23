@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
     @item = Item.create(item_params)
        if @item.valid?
         flash[:message]="New item added"
-       redirect_to @item
+        redirect_to @item
      else
         flash[:errors]=@item.errors.full_messages
         redirect_to new_item_path
@@ -61,8 +61,9 @@ class ItemsController < ApplicationController
         @item = Item.find(params[:id])
     end
     def item_params
-
-        params.require(:item).permit(:name, :description, :condition, :category,:trade, :image_url, :user_id)
+        params[:item][:trade] = params[:item][:trade] == "true" ? true : false
+        
+        params.require(:item).permit(:name, :description, :condition, :category, :trade, :image_url, :user_id)
     end
     
 
