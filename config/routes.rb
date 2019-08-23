@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   post '/decline', to: 'offers#decline'
   post '/confirmed_offer', to: 'offers#confirmed_offer'
   post '/offers/new', to: 'offers#new'
-  
-  
+  get '/offers_to_submit', to: 'offers#to_submit'
+  get '/questions_to_answer', to: 'question_answers#to_answer'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'login#new'
 end

@@ -3,7 +3,14 @@ class ItemsController < ApplicationController
    before_action :autorized, only: [:index, :show, :new, :edit, :update, :create, :destroy, :my_items]
    before_action :find_item, only: [:show, :edit, :update, :destroy]
     def index
-       @items = (Item.all-@current_user.items).select{|item| item.trade}
+      if params[:search]
+        
+        @items = Item.where("name like ?", "%#{params[:search].downcase}%")
+       
+      else
+        @items = Item.all-@current_user.items
+       end
+        
     end 
 
     def new
@@ -21,7 +28,7 @@ class ItemsController < ApplicationController
         redirect_to @item
      else
         flash[:errors]=@item.errors.full_messages
-        redirect_to new_item_path
+        redirect_to item_path
      end
 
     end
@@ -33,6 +40,7 @@ class ItemsController < ApplicationController
             @q_a = QuestionAnswer.new()
         end
      end
+
     def edit
         if @item.user != @current_user
             redirect_to items_path
@@ -41,6 +49,8 @@ class ItemsController < ApplicationController
 
     def update
         @item.update(item_params)
+        # @item.update(trade:false)
+    
        if @item.valid?
         flash[:message]="Item was updated"
        redirect_to @item

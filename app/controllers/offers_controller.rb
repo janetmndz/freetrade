@@ -1,5 +1,5 @@
 class OffersController < ApplicationController
-before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy]
+before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy, :to_submit]
    before_action :find_offer, only: [:show, :edit, :update,:accept, :decline, :destroy, :confirmed_offer]
     
    def index
@@ -43,6 +43,10 @@ before_action :autorized, only: [:index, :show, :new, :update, :create, :destroy
         flash[:errors]=@offer.errors.full_messages
         redirect_to edit_offer_path
      end
+    end
+    
+    def to_submit
+    @offers = @current_user.created_offers.select{|offer| offer.status == true} 
     end
 
     def destroy
