@@ -1,17 +1,33 @@
-<h1>All my offers</h1>
+<h1>All my Offers</h1>
 
-<h4>Offers to Confirm</h4>
-<% @pending_offers.each do |offer| %>
-    <p><%= link_to "#{offer.wanted_item.name} from #{offer.wanted_item.user.name} | My: #{offer.offered_item.name}", offer %></p>
-<% end %>
+<div class="offer_container">
+    <h3>Offers to Confirm</h3>
+    <% @pending_offers.each do |offer| %>
+        <div class= "offer_item">
+            <h5 style="background: lightgrey">Offer with: <%= offer.wanted_item.user.name %></h5>
+            <h4>Trading: <%= link_to "#{offer.wanted_item.name} 🔁 #{offer.offered_item.name} (owned)", offer %>
+            </h4>
+        </div>
 
-<h4>Created Offers</h4>
-<% @created_offers.each do |offer| %>
+        
+    <% end %>
 
-<div><%= link_to "#{offer.wanted_item.name} from #{offer.wanted_item.user.name} | My: #{offer.offered_item.name}", offer %></div>
-<%end%>
+    <h3>Created Offers</h3>
+    <% @created_offers.each do |offer| %>
 
-<h4>Recieved Offers</h4>
-<% @recieved_offers.each do |offer| %>
-    <div><%= link_to "My: #{offer.wanted_item.name} <=> #{offer.offered_item.name} | from: #{offer.offered_item.user.name} | status: #{offer.status}", offer %></div>
-<%end%>
+    <div class= "offer_item">
+        <h5 style="background: #FBBE53">Offering <%= offer.wanted_item.user.name %></h5>
+        <h4>Trading: <%= link_to "#{offer.wanted_item.name} 🔁 #{offer.offered_item.name} (owned)", offer %>
+        </h4>
+    </div>
+    <%end%>
+
+    <h4>Recieved Offers</h4>
+    <% @recieved_offers.each do |offer| %>
+        <div class= "offer_item">
+            <h5 style="background: #7CB518">Offer from: <%= offer.offered_item.user.name %></h5>
+            <h4>Trading: <%= link_to "#{offer.wanted_item.name} (owned) 🔁 #{offer.offered_item.name}", offer %>
+            </h4>
+        </div>
+    <%end%>
+</div>

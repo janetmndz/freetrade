@@ -3,8 +3,7 @@ class ItemsController < ApplicationController
    before_action :autorized, only: [:index, :show, :new, :edit, :update, :create, :destroy, :my_items]
    before_action :find_item, only: [:show, :edit, :update, :destroy]
     def index
-       
-       if params[:search]
+      if params[:search]
         
         @items = Item.where("name like ?", "%#{params[:search].downcase}%")
        
@@ -43,6 +42,9 @@ class ItemsController < ApplicationController
      end
 
     def edit
+        if @item.user != @current_user
+            redirect_to items_path
+        end
     end
 
     def update
