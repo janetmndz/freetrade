@@ -417,7 +417,7 @@ main{
     }
 }
 
-form[action="/items"] {
+main > form[action="/items"] {
     width: 45%;
     margin: 0 auto;
     input[type="text"] {
